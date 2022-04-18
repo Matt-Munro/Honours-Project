@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: init.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: init.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * @file Loads required data and calls setup functions for page
+ * @author Matt Foulis
+ */
+
+// Main data object
+var propositionData = []
+
+// Colour information for proposition text highlight
+var colorData = []
+
+var csvErrorFound = false
+
+/**
+ * Called on website load.
+ */
+function xaiInit () {
+  loadData()
+}
+
+/**
+ * Called if the CSV data file cannot be loaded.
+ */
+function loadError () {
+  console.log('Error whilst attempting to load CSV data file')
+  csvErrorFound = true
+}
+
+/**
+ * Loads necessary data from CSV file. Calls setup function when complete
+ */
+function loadData () {
+  var filePath = 'data/proposition_data.csv'
+
+  // Attempts to load the CSV file containing the required data
+  // If the file cannot be loaded the page will be redirected to the error page
+  d3.csv(filePath).catch(err => loadError()).then(function (data) {
+    if (!csvErrorFound) {
+      data.forEach(function (d) {
+        propositionData.push({
+          id: d.id,
+          proposition: d.proposition,
+          sen_length: parseInt(d.sen_length),
+          avg_word: d.avg_word_length,
+          pos_nouns: parseInt(d.pos_nouns),
+          actual: d.actual,
+          predicted: d.predicted,
+          prediction_value: d.prediction_value,
+          prediction_fact: d.prediction_fact,
+          prediction_policy: d.prediction_policy,
+          speciteller: d.speciteller,
+          pos_verbs: d.pos_verbs,
+          pos_pnouns: d.pos_pnouns,
+          pos_adjectives: d.pos_adjectives,
+          pos_modal_verbs: d.pos_modal_verbs,
+          pos_numerical: d.pos_numerical
+        })
+
+        colorData.push([parseFloat(d.color_w1), parseFloat(d.color_w2), parseFloat(d.color_w3), parseFloat(d.color_w4),
+          parseFloat(d.color_w5), parseFloat(d.color_w6), parseFloat(d.color_w7),
+          parseFloat(d.color_w8), parseFloat(d.color_w9), parseFloat(d.color_w10), parseFloat(d.color_w11), parseFloat(d.color_w12), parseFloat(d.color_w13),
+          parseFloat(d.color_w14), parseFloat(d.color_w15), parseFloat(d.color_w16), parseFloat(d.color_w17), parseFloat(d.color_w18), parseFloat(d.color_w19),
+          parseFloat(d.color_w20), parseFloat(d.color_w21), parseFloat(d.color_w22), parseFloat(d.color_w23), parseFloat(d.color_w24),
+          parseFloat(d.color_w25), parseFloat(d.color_w26), parseFloat(d.color_w27),
+          parseFloat(d.color_w28), parseFloat(d.color_w29), parseFloat(d.color_w30), parseFloat(d.color_w31), parseFloat(d.color_w32),
+          parseFloat(d.color_w33), parseFloat(d.color_w34), parseFloat(d.color_w35), parseFloat(d.color_w36),
+          parseFloat(d.color_w37), parseFloat(d.color_w38), parseFloat(d.color_w39), parseFloat(d.color_w40), parseFloat(d.color_w41)])
+      })
+
+      callSetupFunction()
+    } else {
+      window.location.href = 'error.html'
+    }
+  })
+}
+
+/**
+ * Calls setup functions for page elements
+ */
+function callSetupFunction () {
+  cmDisplay()
+  expcmDisplay()
+  propositionHighlightSetup()
+  VPFBarChartSetup()
+  displayFeaturesBarChart()
+  displayFeaturesScatter()
+  loadShapData()
+  setupTfidf()
+  setDefinitions()
+  textInteractionSetup()
+  setupSmoothScroll()
+}
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#addLegend">addLegend</a></li><li><a href="global.html#barOnMouse">barOnMouse</a></li><li><a href="global.html#barOnMouseOut">barOnMouseOut</a></li><li><a href="global.html#callSetupFunction">callSetupFunction</a></li><li><a href="global.html#cmAddColour">cmAddColour</a></li><li><a href="global.html#cmAddLabels">cmAddLabels</a></li><li><a href="global.html#cmDisplay">cmDisplay</a></li><li><a href="global.html#countTotal">countTotal</a></li><li><a href="global.html#displayBarChart">displayBarChart</a></li><li><a href="global.html#displayFeaturesBarChart">displayFeaturesBarChart</a></li><li><a href="global.html#displayFeaturesScatter">displayFeaturesScatter</a></li><li><a href="global.html#displaySelectedSentence">displaySelectedSentence</a></li><li><a href="global.html#displayShap">displayShap</a></li><li><a href="global.html#expcmDisplay">expcmDisplay</a></li><li><a href="global.html#expcmMatrixDrag">expcmMatrixDrag</a></li><li><a href="global.html#expcmOnDrag">expcmOnDrag</a></li><li><a href="global.html#getCellColour">getCellColour</a></li><li><a href="global.html#getMaxLength">getMaxLength</a></li><li><a href="global.html#getPointColour">getPointColour</a></li><li><a href="global.html#getPropositionColour">getPropositionColour</a></li><li><a href="global.html#getPropositionX">getPropositionX</a></li><li><a href="global.html#getPropositionY">getPropositionY</a></li><li><a href="global.html#getShapColor">getShapColor</a></li><li><a href="global.html#getVPFBarColor">getVPFBarColor</a></li><li><a href="global.html#highlightDefinition">highlightDefinition</a></li><li><a href="global.html#highlightLength">highlightLength</a></li><li><a href="global.html#interactiveTextOnClick">interactiveTextOnClick</a></li><li><a href="global.html#interactiveTextOnDrag">interactiveTextOnDrag</a></li><li><a href="global.html#isBrushed">isBrushed</a></li><li><a href="global.html#loadData">loadData</a></li><li><a href="global.html#loadError">loadError</a></li><li><a href="global.html#loadShapData">loadShapData</a></li><li><a href="global.html#loadXTestData">loadXTestData</a></li><li><a href="global.html#pointOnMouse">pointOnMouse</a></li><li><a href="global.html#printPropositions">printPropositions</a></li><li><a href="global.html#propositionHighlightHeaderSetup">propositionHighlightHeaderSetup</a></li><li><a href="global.html#propositionHighlightSetup">propositionHighlightSetup</a></li><li><a href="global.html#propositionTextOnMouse">propositionTextOnMouse</a></li><li><a href="global.html#scrollOn">scrollOn</a></li><li><a href="global.html#setDefinitions">setDefinitions</a></li><li><a href="global.html#setupTfidf">setupTfidf</a></li><li><a href="global.html#setupXAxisLabel">setupXAxisLabel</a></li><li><a href="global.html#shapLoadError">shapLoadError</a></li><li><a href="global.html#textInteractionSetup">textInteractionSetup</a></li><li><a href="global.html#tfidfDragBegin">tfidfDragBegin</a></li><li><a href="global.html#tfidfUpdateResult">tfidfUpdateResult</a></li><li><a href="global.html#unhighlightLength">unhighlightLength</a></li><li><a href="global.html#updateAccuracyValues">updateAccuracyValues</a></li><li><a href="global.html#updateChart">updateChart</a></li><li><a href="global.html#updateFeaturesBar">updateFeaturesBar</a></li><li><a href="global.html#updateMatrixArray">updateMatrixArray</a></li><li><a href="global.html#updateScatter">updateScatter</a></li><li><a href="global.html#updateTextIneractionResult">updateTextIneractionResult</a></li><li><a href="global.html#updateVPFChart">updateVPFChart</a></li><li><a href="global.html#updateXAxis">updateXAxis</a></li><li><a href="global.html#updateYAxis">updateYAxis</a></li><li><a href="global.html#VPFBarChartSetup">VPFBarChartSetup</a></li><li><a href="global.html#xaiInit">xaiInit</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.4</a> on Mon May 04 2020 11:53:02 GMT+0100 (British Summer Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

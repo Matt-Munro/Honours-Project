@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: scroll.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: scroll.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * @file Controls behaviour of the website when scrolling
+ * @author Matt Foulis
+ */
+
+/**
+ * Changes the colour of the navigation bar link when clicked or scrolled to
+ * @param {string} id - The id of the link element to alter
+ */
+function scrollOn (id) {
+  var links = document.getElementById('pageLinks').childNodes
+
+  // Reset all links to default
+  for (var i = 0; i &lt; links.length; i++) {
+    if (links[i].nodeName.toLowerCase() === 'a') {
+      links[i].style.color = '#9EB3C2'
+      links[i].style.textDecoration = 'none'
+    }
+  }
+
+  // Set current link to white
+  document.getElementById(id).style.color = 'white'
+  document.getElementById(id).style.textDecoration = 'underline'
+}
+
+function setupSmoothScroll () {
+  $(document).ready(function () {
+    $('a').click(function () {
+      if ($($(this).attr('href')).offset() !== undefined) {
+        $('html, body').animate({ scrollTop: $($(this).attr('href')).offset().top }, 750)
+        window.location.hash = $(this).attr('href')
+      }
+    })
+  })
+}
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#addLegend">addLegend</a></li><li><a href="global.html#barOnMouse">barOnMouse</a></li><li><a href="global.html#barOnMouseOut">barOnMouseOut</a></li><li><a href="global.html#callSetupFunction">callSetupFunction</a></li><li><a href="global.html#cmAddColour">cmAddColour</a></li><li><a href="global.html#cmAddLabels">cmAddLabels</a></li><li><a href="global.html#cmDisplay">cmDisplay</a></li><li><a href="global.html#countTotal">countTotal</a></li><li><a href="global.html#displayBarChart">displayBarChart</a></li><li><a href="global.html#displayFeaturesBarChart">displayFeaturesBarChart</a></li><li><a href="global.html#displayFeaturesScatter">displayFeaturesScatter</a></li><li><a href="global.html#displaySelectedSentence">displaySelectedSentence</a></li><li><a href="global.html#displayShap">displayShap</a></li><li><a href="global.html#expcmDisplay">expcmDisplay</a></li><li><a href="global.html#expcmMatrixDrag">expcmMatrixDrag</a></li><li><a href="global.html#expcmOnDrag">expcmOnDrag</a></li><li><a href="global.html#getCellColour">getCellColour</a></li><li><a href="global.html#getMaxLength">getMaxLength</a></li><li><a href="global.html#getPointColour">getPointColour</a></li><li><a href="global.html#getPropositionColour">getPropositionColour</a></li><li><a href="global.html#getPropositionX">getPropositionX</a></li><li><a href="global.html#getPropositionY">getPropositionY</a></li><li><a href="global.html#getShapColor">getShapColor</a></li><li><a href="global.html#getVPFBarColor">getVPFBarColor</a></li><li><a href="global.html#highlightDefinition">highlightDefinition</a></li><li><a href="global.html#highlightLength">highlightLength</a></li><li><a href="global.html#interactiveTextOnClick">interactiveTextOnClick</a></li><li><a href="global.html#interactiveTextOnDrag">interactiveTextOnDrag</a></li><li><a href="global.html#isBrushed">isBrushed</a></li><li><a href="global.html#loadData">loadData</a></li><li><a href="global.html#loadError">loadError</a></li><li><a href="global.html#loadShapData">loadShapData</a></li><li><a href="global.html#loadXTestData">loadXTestData</a></li><li><a href="global.html#pointOnMouse">pointOnMouse</a></li><li><a href="global.html#printPropositions">printPropositions</a></li><li><a href="global.html#propositionHighlightHeaderSetup">propositionHighlightHeaderSetup</a></li><li><a href="global.html#propositionHighlightSetup">propositionHighlightSetup</a></li><li><a href="global.html#propositionTextOnMouse">propositionTextOnMouse</a></li><li><a href="global.html#scrollOn">scrollOn</a></li><li><a href="global.html#setDefinitions">setDefinitions</a></li><li><a href="global.html#setupTfidf">setupTfidf</a></li><li><a href="global.html#setupXAxisLabel">setupXAxisLabel</a></li><li><a href="global.html#shapLoadError">shapLoadError</a></li><li><a href="global.html#textInteractionSetup">textInteractionSetup</a></li><li><a href="global.html#tfidfDragBegin">tfidfDragBegin</a></li><li><a href="global.html#tfidfUpdateResult">tfidfUpdateResult</a></li><li><a href="global.html#unhighlightLength">unhighlightLength</a></li><li><a href="global.html#updateAccuracyValues">updateAccuracyValues</a></li><li><a href="global.html#updateChart">updateChart</a></li><li><a href="global.html#updateFeaturesBar">updateFeaturesBar</a></li><li><a href="global.html#updateMatrixArray">updateMatrixArray</a></li><li><a href="global.html#updateScatter">updateScatter</a></li><li><a href="global.html#updateTextIneractionResult">updateTextIneractionResult</a></li><li><a href="global.html#updateVPFChart">updateVPFChart</a></li><li><a href="global.html#updateXAxis">updateXAxis</a></li><li><a href="global.html#updateYAxis">updateYAxis</a></li><li><a href="global.html#VPFBarChartSetup">VPFBarChartSetup</a></li><li><a href="global.html#xaiInit">xaiInit</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.4</a> on Mon May 04 2020 11:53:02 GMT+0100 (British Summer Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

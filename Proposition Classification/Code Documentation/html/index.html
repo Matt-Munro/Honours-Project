@@ -1,0 +1,380 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Welcome to Proposition Classification’s documentation! &#8212; Proposition Classification 1 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="module-process_data">
+<span id="welcome-to-proposition-classification-s-documentation"></span><h1>Welcome to Proposition Classification’s documentation!<a class="headerlink" href="#module-process_data" title="Permalink to this headline">¶</a></h1>
+<p>process_data.py
+Conducts pre-processing of the data for use by the models</p>
+<dl class="py function">
+<dt id="process_data.encode_labels">
+<code class="sig-prename descclassname">process_data.</code><code class="sig-name descname">encode_labels</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#process_data.encode_labels" title="Permalink to this definition">¶</a></dt>
+<dd><p>Encodes the Value, Policy, Fact labels as 0, 1, and 2 respectively</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="process_data.main">
+<code class="sig-prename descclassname">process_data.</code><code class="sig-name descname">main</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#process_data.main" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calls the pre-processing functions in order</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="process_data.read_data_file">
+<code class="sig-prename descclassname">process_data.</code><code class="sig-name descname">read_data_file</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#process_data.read_data_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads in the data and stores in a pandas dataframe</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="process_data.remove_proposition_spaces">
+<code class="sig-prename descclassname">process_data.</code><code class="sig-name descname">remove_proposition_spaces</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#process_data.remove_proposition_spaces" title="Permalink to this definition">¶</a></dt>
+<dd><p>Removes the spaces between proposition sentences</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="process_data.sort_class_labels">
+<code class="sig-prename descclassname">process_data.</code><code class="sig-name descname">sort_class_labels</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#process_data.sort_class_labels" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts the class labels to uppercase and removes propositions with blank labels</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="process_data.write_data_file">
+<code class="sig-prename descclassname">process_data.</code><code class="sig-name descname">write_data_file</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#process_data.write_data_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Writes the updated dataframe to a CSV file</p>
+</dd></dl>
+
+<span class="target" id="module-model"></span><p>model.py
+Creates and trains a scikit-learn ML model and outputs accuracy statistics</p>
+<dl class="py function">
+<dt id="model.create_model">
+<code class="sig-prename descclassname">model.</code><code class="sig-name descname">create_model</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#model.create_model" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates and trains the model</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="model.get_model_predictions">
+<code class="sig-prename descclassname">model.</code><code class="sig-name descname">get_model_predictions</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#model.get_model_predictions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the model predictions and calls the output function</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="model.main">
+<code class="sig-prename descclassname">model.</code><code class="sig-name descname">main</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#model.main" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calls the model functions in order</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="model.prepare_model_data">
+<code class="sig-prename descclassname">model.</code><code class="sig-name descname">prepare_model_data</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#model.prepare_model_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Builds and runs the model</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="model.write_prediction">
+<code class="sig-prename descclassname">model.</code><code class="sig-name descname">write_prediction</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">model_name</span></em>, <em class="sig-param"><span class="n">prediction</span></em>, <em class="sig-param"><span class="n">mean</span></em>, <em class="sig-param"><span class="n">filepath</span></em><span class="sig-paren">)</span><a class="headerlink" href="#model.write_prediction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Writes the model accuracy statistics to the terminal and to a text file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>prediction</strong> – The prediction values for the model</p></li>
+<li><p><strong>mean</strong> – The mean average of the model results</p></li>
+<li><p><strong>filepath</strong> – The location of the text file to write to</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<span class="target" id="module-features"></span><p>Creates and loads the features required by the ML model</p>
+<dl class="py function">
+<dt id="features.feat_avg_word_length">
+<code class="sig-prename descclassname">features.</code><code class="sig-name descname">feat_avg_word_length</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#features.feat_avg_word_length" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates the average word length feature</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="features.feat_pos">
+<code class="sig-prename descclassname">features.</code><code class="sig-name descname">feat_pos</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#features.feat_pos" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates the Part-of-speech features</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="features.feat_sentence_length">
+<code class="sig-prename descclassname">features.</code><code class="sig-name descname">feat_sentence_length</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#features.feat_sentence_length" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates the sentence length feature</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="features.feat_sentiment">
+<code class="sig-prename descclassname">features.</code><code class="sig-name descname">feat_sentiment</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#features.feat_sentiment" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates the sentiment feature</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="features.feat_specificity">
+<code class="sig-prename descclassname">features.</code><code class="sig-name descname">feat_specificity</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#features.feat_specificity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Loads the specificity feature data</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="features.feat_tense">
+<code class="sig-prename descclassname">features.</code><code class="sig-name descname">feat_tense</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#features.feat_tense" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates the proposition tense features</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="features.feat_tfidf">
+<code class="sig-prename descclassname">features.</code><code class="sig-name descname">feat_tfidf</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#features.feat_tfidf" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates the term frequency-inverse document frequency feature</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="features.feat_word_lengths">
+<code class="sig-prename descclassname">features.</code><code class="sig-name descname">feat_word_lengths</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#features.feat_word_lengths" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates the word length and longest word features</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="features.is_adjective">
+<code class="sig-prename descclassname">features.</code><code class="sig-name descname">is_adjective</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tag</span></em><span class="sig-paren">)</span><a class="headerlink" href="#features.is_adjective" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks is parameter tag is an adjective or not</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>tag</strong> – POS tag for the word</p>
+</dd>
+<dt class="field-even">Returns bool</dt>
+<dd class="field-even"><p>True if word tag represents adjective</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="features.is_adverb">
+<code class="sig-prename descclassname">features.</code><code class="sig-name descname">is_adverb</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tag</span></em><span class="sig-paren">)</span><a class="headerlink" href="#features.is_adverb" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks is parameter tag is an adverb or not</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>tag</strong> – POS tag for the word</p>
+</dd>
+<dt class="field-even">Returns bool</dt>
+<dd class="field-even"><p>True if tab represents adverb</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="features.is_noun">
+<code class="sig-prename descclassname">features.</code><code class="sig-name descname">is_noun</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tag</span></em><span class="sig-paren">)</span><a class="headerlink" href="#features.is_noun" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks is parameter tag is a noun or not</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>tag</strong> – POS tag for the word</p>
+</dd>
+<dt class="field-even">Returns bool</dt>
+<dd class="field-even"><p>True if tab represents noun</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="features.is_verb">
+<code class="sig-prename descclassname">features.</code><code class="sig-name descname">is_verb</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tag</span></em><span class="sig-paren">)</span><a class="headerlink" href="#features.is_verb" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks is parameter tag is a verb or not</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>tag</strong> – POS tag for the word</p>
+</dd>
+<dt class="field-even">Returns bool</dt>
+<dd class="field-even"><p>True if tab represents verb</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="features.lemmatize_words">
+<code class="sig-prename descclassname">features.</code><code class="sig-name descname">lemmatize_words</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tfidf_input</span></em><span class="sig-paren">)</span><a class="headerlink" href="#features.lemmatize_words" title="Permalink to this definition">¶</a></dt>
+<dd><p>Lemmatizer for the TFIDF vectorizer. Lemmatizes words to their root form</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>tfidf_input</strong> – The words provided by the TFIDF vectorizer</p>
+</dd>
+<dt class="field-even">Returns words</dt>
+<dd class="field-even"><p>The lemmatized words</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="features.main">
+<code class="sig-prename descclassname">features.</code><code class="sig-name descname">main</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#features.main" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calls the feature functions in order</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="features.penn_to_wn">
+<code class="sig-prename descclassname">features.</code><code class="sig-name descname">penn_to_wn</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tag</span></em><span class="sig-paren">)</span><a class="headerlink" href="#features.penn_to_wn" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks the POS type for a tag</p>
+<p>Code for penn_to_wn and is_&lt;postype&gt; (e.g. is_verb(tag)) functions taken from user ‘bogs’ at:
+<a class="reference external" href="https://stackoverflow.com/questions/25534214/nltk-wordnet-lemmatizer-shouldnt-it-lemmatize-all-inflections-of-a-word">https://stackoverflow.com/questions/25534214/nltk-wordnet-lemmatizer-shouldnt-it-lemmatize-all-inflections-of-a-word</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>tag</strong> – POS tag for the word</p>
+</dd>
+<dt class="field-even">Returns wordnet word</dt>
+<dd class="field-even"><p>The root word</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="features.read_data_file">
+<code class="sig-prename descclassname">features.</code><code class="sig-name descname">read_data_file</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#features.read_data_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads the pre-processed file into a pandas dataframe</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="features.write_to_csv">
+<code class="sig-prename descclassname">features.</code><code class="sig-name descname">write_to_csv</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#features.write_to_csv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Writes the features dataframe to a CSV file</p>
+</dd></dl>
+
+<span class="target" id="module-lime_data"></span><p>lime.py
+Uses LIME to measure the impact of each word on a classifier</p>
+<dl class="py function">
+<dt id="lime_data.collate_all_lime_values">
+<code class="sig-prename descclassname">lime_data.</code><code class="sig-name descname">collate_all_lime_values</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#lime_data.collate_all_lime_values" title="Permalink to this definition">¶</a></dt>
+<dd><p>Combines the significant lime values with the 0 values to store the lime value for each word</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="lime_data.get_lime_values">
+<code class="sig-prename descclassname">lime_data.</code><code class="sig-name descname">get_lime_values</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#lime_data.get_lime_values" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a lime explainer and runs on the test data and stores the lime values for significat words</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="lime_data.lime_model">
+<code class="sig-prename descclassname">lime_data.</code><code class="sig-name descname">lime_model</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#lime_data.lime_model" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates and trains the model and retrieves its predictions</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="lime_data.main">
+<code class="sig-prename descclassname">lime_data.</code><code class="sig-name descname">main</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#lime_data.main" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calls the lime functions in order</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="lime_data.process_tfidf">
+<code class="sig-prename descclassname">lime_data.</code><code class="sig-name descname">process_tfidf</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#lime_data.process_tfidf" title="Permalink to this definition">¶</a></dt>
+<dd><p>Processes the proposition text as tfidf for use by the model</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="lime_data.read_data_file">
+<code class="sig-prename descclassname">lime_data.</code><code class="sig-name descname">read_data_file</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#lime_data.read_data_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads in the data file</p>
+</dd></dl>
+
+<div class="toctree-wrapper compound">
+</div>
+</div>
+<div class="section" id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="#">Proposition Classification</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="#">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Matt Foulis.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.0.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: definitions.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: definitions.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * @file Adds interactive functionality for displaying definitions
+ * @author Matt Foulis
+ */
+
+/**
+ * Adds definitions to page when word is selected by user.
+ * Changes background colour of selected item and updates definition text.
+ */
+function setDefinitions () {
+  // Definitions. Accessed using word as key to obtain definition
+  var definitionStrings = {
+    precision: '&lt;b>Precision&lt;/b>&lt;br />This measures the actual number of True cases compared to the instances that our model has predicted as True. In other words, our model says these cases are True, how many times is it correct? For our dog identification example, this means if our model identifies 10 photos as containing dogs, but only 5 actually do, our precision is 5/10, or 0.5.&lt;br /> Precision = True Positive / (True Positive + False Positive)',
+    recall: '&lt;b>Recall&lt;/b>&lt;br />This measure the number of correct identifications compared to the total number of True cases. If our model identifies 15 images as containing dogs, but misses the other 5 images that also contain dogs, our recall is 15/20, or 0.75.&lt;br/>Recall = True Positives / (True Positives + False Negatives)',
+    specificity: '&lt;b>Specificity&lt;/b>&lt;br />This measures the number of False cases which are actually False. If our model identifies 10 images as not containing dogs, but misses another 15 which do not contain dogs, our specificity is 10/25, or 0.4. &lt;br />Specificity = True Negatives / (True Negatives + False Negatives)',
+    accuracy: '&lt;b>Accuracy&lt;/b>&lt;br />This measures the number of instances our model got right. If we have 20 predictions that are correct, out of a total of 40, our accuracy is 20/40, or 0.5. Although useful, accuracy can be misleading if the data used is unbalanced. In cases where there are fewer True cases for example, a model which always picks False, may still be able to achieve a high result. &lt;br />Accuracy = True Positives + True Negatives / True Positives + True Negatives + False Positives + False Negatives ',
+    f1score: '&lt;b>F1 Score&lt;/b> &lt;br />This uses both precision and recall to provide a more useful measurement than accuracy alone. &lt;br />F1 = 2 * (precision * recall) / (precision + recall) ',
+    truepositives: 'The prediction correctly indicates that a condition does hold',
+    falsepositives: 'The prediction indicates that a condition does hold, while in fact it does not',
+    falsenegatives: 'The prediction indicates that a condition does not hold, while in fact it does',
+    truenegatives: 'The prediction correctly indicates that a condition does not hold',
+    tf: 'Term Frequency = &lt;br />(number of times the term ‘computer’ appears in a document) / (total number of words in the document)',
+    idf: 'Inverse Document Frequency = &lt;br />log(total number of documents / number of documents containing the word ‘computer’)',
+    tfidf: 'Term frequency-inverse document frequency = &lt;br />term frequency * inverse document frequency '
+  }
+
+  // Adds interaction behaviour to definition class items.
+  d3.selectAll('.definition')
+    .on('mouseover', function () {
+      d3.select('body').style('cursor', 'pointer') // Set cursor appearance
+    })
+    .on('mouseout', function () {
+      d3.select('body').style('cursor', 'default') // Revert cursor appearance
+    })
+    .on('click', function (d) {
+      var selectedWord = d3.select(this)
+
+      // Get text of cell and use to access definitions object
+      var corrected = selectedWord._groups[0][0].cells[0].innerText
+      corrected = corrected.toLowerCase()
+      corrected = corrected.replace(/ /g, '') // Remove spaces (e.g. f1 score)
+
+      // Compose ID of destination for definition string
+      // Definitions used in multiple tables so here the correct one is chosen
+      var destination = '#' + selectedWord._groups[0][0].id + '_destination'
+
+      // Update definition string using ID to access element
+      d3.select(destination).html(definitionStrings[corrected])
+    })
+}
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#addLegend">addLegend</a></li><li><a href="global.html#barOnMouse">barOnMouse</a></li><li><a href="global.html#barOnMouseOut">barOnMouseOut</a></li><li><a href="global.html#callSetupFunction">callSetupFunction</a></li><li><a href="global.html#cmAddColour">cmAddColour</a></li><li><a href="global.html#cmAddLabels">cmAddLabels</a></li><li><a href="global.html#cmDisplay">cmDisplay</a></li><li><a href="global.html#countTotal">countTotal</a></li><li><a href="global.html#displayBarChart">displayBarChart</a></li><li><a href="global.html#displayFeaturesBarChart">displayFeaturesBarChart</a></li><li><a href="global.html#displayFeaturesScatter">displayFeaturesScatter</a></li><li><a href="global.html#displaySelectedSentence">displaySelectedSentence</a></li><li><a href="global.html#displayShap">displayShap</a></li><li><a href="global.html#expcmDisplay">expcmDisplay</a></li><li><a href="global.html#expcmMatrixDrag">expcmMatrixDrag</a></li><li><a href="global.html#expcmOnDrag">expcmOnDrag</a></li><li><a href="global.html#getCellColour">getCellColour</a></li><li><a href="global.html#getMaxLength">getMaxLength</a></li><li><a href="global.html#getPointColour">getPointColour</a></li><li><a href="global.html#getPropositionColour">getPropositionColour</a></li><li><a href="global.html#getPropositionX">getPropositionX</a></li><li><a href="global.html#getPropositionY">getPropositionY</a></li><li><a href="global.html#getShapColor">getShapColor</a></li><li><a href="global.html#getVPFBarColor">getVPFBarColor</a></li><li><a href="global.html#highlightDefinition">highlightDefinition</a></li><li><a href="global.html#highlightLength">highlightLength</a></li><li><a href="global.html#interactiveTextOnClick">interactiveTextOnClick</a></li><li><a href="global.html#interactiveTextOnDrag">interactiveTextOnDrag</a></li><li><a href="global.html#isBrushed">isBrushed</a></li><li><a href="global.html#loadData">loadData</a></li><li><a href="global.html#loadError">loadError</a></li><li><a href="global.html#loadShapData">loadShapData</a></li><li><a href="global.html#loadXTestData">loadXTestData</a></li><li><a href="global.html#pointOnMouse">pointOnMouse</a></li><li><a href="global.html#printPropositions">printPropositions</a></li><li><a href="global.html#propositionHighlightHeaderSetup">propositionHighlightHeaderSetup</a></li><li><a href="global.html#propositionHighlightSetup">propositionHighlightSetup</a></li><li><a href="global.html#propositionTextOnMouse">propositionTextOnMouse</a></li><li><a href="global.html#scrollOn">scrollOn</a></li><li><a href="global.html#setDefinitions">setDefinitions</a></li><li><a href="global.html#setupTfidf">setupTfidf</a></li><li><a href="global.html#setupXAxisLabel">setupXAxisLabel</a></li><li><a href="global.html#shapLoadError">shapLoadError</a></li><li><a href="global.html#textInteractionSetup">textInteractionSetup</a></li><li><a href="global.html#tfidfDragBegin">tfidfDragBegin</a></li><li><a href="global.html#tfidfUpdateResult">tfidfUpdateResult</a></li><li><a href="global.html#unhighlightLength">unhighlightLength</a></li><li><a href="global.html#updateAccuracyValues">updateAccuracyValues</a></li><li><a href="global.html#updateChart">updateChart</a></li><li><a href="global.html#updateFeaturesBar">updateFeaturesBar</a></li><li><a href="global.html#updateMatrixArray">updateMatrixArray</a></li><li><a href="global.html#updateScatter">updateScatter</a></li><li><a href="global.html#updateTextIneractionResult">updateTextIneractionResult</a></li><li><a href="global.html#updateVPFChart">updateVPFChart</a></li><li><a href="global.html#updateXAxis">updateXAxis</a></li><li><a href="global.html#updateYAxis">updateYAxis</a></li><li><a href="global.html#VPFBarChartSetup">VPFBarChartSetup</a></li><li><a href="global.html#xaiInit">xaiInit</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.4</a> on Mon May 04 2020 11:53:02 GMT+0100 (British Summer Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

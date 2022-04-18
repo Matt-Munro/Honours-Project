@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+	<meta charset="utf-8">
+	<title>XAI</title>
+	<meta name="description" content="">
+	<meta name="author" content="Matthew Foulis">
+
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+	<link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+	<link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;600&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Pridi:wght@300&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;700&family=IBM+Plex+Sans:wght@300;400&family=IBM+Plex+Serif:wght@200;400&display=swap" rel="stylesheet">
+
+  <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+	<link rel="stylesheet" href="css/normalize.css">
+	<link rel="stylesheet" href="css/skeleton.css">
+	<link rel="stylesheet" href="css/style.css">
+  
+  <!-- js
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+	<!--   D3 Files -->
+	<script src="https://d3js.org/d3.v5.min.js"></script>
+	<script src="https://d3js.org/d3-array.v2.min.js"></script>
+	<script src="https://d3js.org/d3-dispatch.v1.min.js"></script>
+	<script src="https://d3js.org/d3-selection.v1.min.js"></script>
+	<script src="https://d3js.org/d3-drag.v1.min.js"></script>
+	<script src="https://d3js.org/d3-transition.v1.min.js"></script>
+	<script src="https://d3js.org/d3-color.v1.min.js"></script>
+	<script src="https://d3js.org/d3-interpolate.v1.min.js"></script>
+	<script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+	
+	<!--  jQuery -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+	<!-- Created files -->
+	<script type="text/javascript" src="js/init.js"></script>
+	<script type="text/javascript" src="js/definitions.js"></script>
+	<script type="text/javascript" src="js/confusionMatrix_data.js"></script>
+	<script type="text/javascript" src="js/explainable_confusion_matrix.js"></script>
+	<script type="text/javascript" src="js/VPFBarChart.js"></script>
+	<script type="text/javascript" src="js/textInteraction.js"></script>
+	<script type="text/javascript" src="js/featuresBarChart.js"></script>
+	<script type="text/javascript" src="js/shap.js"></script>
+	<script type="text/javascript" src="js/tfidf.js"></script>
+	<script type="text/javascript" src="js/featuresScatterPlot.js"></script>
+	<script type="text/javascript" src="js/propositionTextHighlight.js"></script>
+	<script type="text/javascript" src="js/scroll.js"></script>
+
+  <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+	<link rel="icon" type="image/png" href="images/favicon.png">
+
+
+</head>
+<body>
+
+  <!-- Primary Page Layout
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+
+<!-- Sidebar –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+<div class="Sidebar">
+	<div class="navLinks">
+		<a href="index.html" class="currentPage">HOME</a> <br />
+		<a href="about.html">ABOUT</a> <br />
+		<a href="contact.html">CONTACT</a> <br />
+	</div>
+	
+	<div class="pageLinks" id="pageLinks">
+		<br />
+		<a href="#link_introduction" id="linkIntroduction" onclick="scrollOn('linkIntroduction')">INTRODUCTION</a> <br />
+		<a href="#link_interactiveConfusion" id="linkConfusion" onclick="scrollOn('linkConfusion')">CONFUSION MATRIX</a> <br />
+		<a href="#link_tfidf" id="linkTFIDF" onclick="scrollOn('linkTFIDF')">TEXT TO NUMBERS</a> <br />
+		<a href="#link_realData" id="linkRealData" onclick="scrollOn('linkRealData')">A REAL EXAMPLE</a> <br />
+		<a href="#link_scatterPlot" id="linkScatter" onclick="scrollOn('linkScatter')">DATA CHARTS</a> <br />
+		<a href="#link_LIME" id="linkLime" onclick="scrollOn('linkLime')">WORD IMPORTANCE</a> <br />
+		<a href="#link_SHAP" id="linkShap" onclick="scrollOn('linkShap')">SHAP</a> <br />
+		<a href="#link_summary" id="linkSummary" onclick="scrollOn('linkSummary')">SUMMARY</a> <br />
+	</div>
+</div>
+
+
+<!-- Small screen header –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+<div class="smallScreenHeader">
+	<div class="row">
+		<div class="twelve columns">
+			<a href="index.html" class="currentPage">HOME</a> 
+			<a href="about.html">ABOUT</a> 
+			<a href="contact.html">CONTACT</a> 
+		</div>
+	</div>
+</div>
+
+
+<!-- Heading –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+<div id="scrollHeading" onmouseover="scrollOn('linkIntroduction')">
+	<div class="Heading" role=main>
+		<div class="row">
+			<div class="twelve columns" >
+				<a id="link_introduction">
+					<h1> Explainable Artificial Intelligence</h1>
+				</a>
+			</div>
+		</div>
+	
+		<div class="row">
+			<div class="twelve columns" id="introduction_text">
+				<p>Machine Learning involves using sets of data to train a model, so that when we provide the model with new information, it is able to give us an accurate prediction about the information. For example, classifying an email as ‘spam’ or ‘not spam’, or predicting the cost of a house given information such as the number of bedrooms and the postcode. </p>
+				<p>Although useful, a problem with some Machine Learning models is their ‘black box’ nature. This means that although we are able to give input to the model, and receive outputs in the form of a prediction or classification, we are unable to see why a specific result was reached. This is a problem due to the ever growing ways in which Machine Learning is being used that affect our lives. Examples include banking and insurance decisions, medical diagnostics, and online advertising. Being knowledgeable about Machine Learning is therefore important if we want to understand why certain decisions were made.</p> 
+				<p>This website provides an introduction to some different Machine Learning techniques and some of the ways we can try to understand these ‘black boxes’. The website has interactive elements which you can use to learn more about some of the techniques. Here is a simple example to get you started:  </p>
+				<p><span class="iaNumValue" id="ia_num">15</span><span class="interactionText">drag</span><span class="iaTextClickValue">x</span><span class="interactionText" id="interactionTextModel">click</span><span class="iaNumValue" id="ia_num">50</span><span class="interactionText">drag</span>=<span class="iaNumResultValue">37500</span></p>
+				<p>Holding down, and then dragging left or right on the numbers marked 'drag', will update the result. You can also click (or tap on mobile) the word marked 'click' to cycle through the options.</p>
+
+			</div>
+		</div>
+	</div>
+</div>
+<hr />
+
+<!-- Interactive confusion matrix –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+<div id="scrollConfusion" onmouseover="scrollOn('linkConfusion')">
+	<div class="ContainerConfusionMatrix">
+		<div class="row">
+			<div class="twelve columns">
+				<a id="link_interactiveConfusion">
+					<h2>Confusion Matrix</h2>
+				</a>
+					<p>When looking at the results of a machine learning task, one technique that can be useful is a ‘confusion matrix’. A confusion matrix is a table that gives us an idea about how well the task was performed. In the example below, we have a 2x2 matrix with the labels ’True’ and ‘False’. The labels of the y-axis (those on the left-hand side) of the table are the ‘actual’ results. So for example, if we were training a machine learning model to say whether an image contained a dog, an image with a dog would have the label ’True’, and an image without a dog would have the label ‘False’. The x-axis labels (bottom side of the table) are the ‘predicted’ result. So if our machine learning classifies and image as containing a dog, the label is ‘True’, and if it does not, the label is ‘False’. As we can see, this allows us to see the instances in which our classifier has applied the correct or incorrect True or False label. </p>
+					<p>With these results, we are able to calculate various accuracy measurements about the performance of our model. Some examples are presented in the table below the confusion matrix. You can click on a measurement to see its definition. The confusion matrix is interactive. You can click and drag the numbers to see a highlighted definition for that box, and see how changing the results affects the accuracy measurements. 
+					</p>
+			</div>
+		</div>
+		<div class="row">
+			<div class="five columns" id="exp_confusion">
+			</div>
+			<div class="seven columns">		
+				<table>
+					<tr>
+						<td>True Positive</td>
+						<td id="truePositiveDefinition">The prediction correctly indicates that a condition does hold (e.g. A model correctly identifies that a picture contains a dog)</td>
+					</tr>
+					<tr>
+						<td>True Negative</td>
+						<td id="trueNegativeDefinition">The prediction correctly indicates that a condition does not hold (e.g. A model correctly identifies that a picture does not contain a dog)</td>
+					</tr>
+					<tr>
+						<td>False Positive</td>
+						<td id="falsePositiveDefinition">The prediction indicates that a condition <b>does</b> hold, while in fact it does not (e.g. A model says a picture contains a dog, when it does not)</td>
+					</tr>
+					<tr>
+						<td>False Negative</td>
+						<td id="falseNegativeDefinition">The prediction indicates that a condition <b>does not</b> hold, while in fact it does. (e.g. A model says a picture does not contain a dog, when it does)</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	
+		<div class ="row">
+		
+				<div class="twelve columns">
+					<table>
+						<tr class="definition" id="definition_conf">
+							<td>Precision</td>
+							<td class="exp_matrix_measurement" id="exp_matrix_precision">0.3333</td>
+							<td rowspan="5" class="table_definition" id="definition_conf_destination">Click a measurement to see its definition</td>
+						</tr>
+						<tr class="definition" id="definition_conf">
+							<td>Recall</td>
+							<td class="exp_matrix_measurement" id="exp_matrix_sensitivity">0.25000</td>
+						</tr>
+						<tr class="definition" id="definition_conf">
+							<td>Specificity</td>
+							<td class="exp_matrix_measurement" id="exp_matrix_specificity">0.6667</td>
+						</tr>
+						<tr class="definition" id="definition_conf">
+							<td>Accuracy</td>
+							<td class="exp_matrix_measurement" id="exp_matrix_accuracy">0.5000</td>
+						</tr>
+						<tr class="definition" id="definition_conf">
+							<td>F1 Score</td>
+							<td class="exp_matrix_measurement" id="exp_matrix_f1">0.2857</td>
+						</tr>
+					</table>
+				</div>
+		</div>
+	</div>
+</div>
+<hr />
+
+
+<!-- TFIDF –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+<div id="scrollTFIDF" onmouseover="scrollOn('linkTFIDF')">
+	<div class="ContainerTFIDF">
+		<div class="row">
+			<div class="twelve columns" id="tfidf">
+				<a id="link_tfidf">
+					<h2>Text to numbers</h2>
+				</a>
+				<p>Often we are interested in looking at text data, however, Machine Learning models typically only accept number values as input. This means that we need a way of representing text as numbers so we can feed it into our model. One such method is known as ’Term Frequency-Inverse Document Frequency’. This can be broken down into two stages, term frequency and then inverse document frequency. </p>
+				<p>Term Frequency is the number of occurrences of a term within a document. The inverse document frequency is used to measure the importance of a word. Words such as ‘is’ or ‘the’ are likely to appear in many documents and are therefore less important that more unique words, such as ‘computer’. Use the draggable numbers below to see how the resulting term frequency-inverse document frequency (tf-idf) changes for the word ‘computer’. You can also click on the measurements to see how they are calculated.</p>
+				<p>If the word 'computer' appears <span class="tfidf_interaction" id="tfidf_word_freq">5</span><span class="interactionText">drag</span> times, in a document <span class="tfidf_interaction" id="tfidf_document_size">20</span><span class="interactionText">drag</span> words long, </p>
+				<p>and is contained within <span class="tfidf_interaction" id="tfidf_containing_docs">10</span><span class="interactionText">drag</span> different documents out of a total of <span class="tfidf_interaction" id="tfidf_total_docs">30</span><span class="interactionText">drag</span>, </p>
+				<p>the tf-idf for the word will be: <span class="tfidf_result" id="tfidf_result">0.2747</span>.
+			</div>
+		</div>
+
+		<div class="row">
+
+			<div class="six columns" id="tfidf_image">
+			</div>
+
+			<div class="six columns">
+				<table>
+					<tr class="definition" id="definition_tfidf">
+						<td>tf</td>
+						<td id="tfidf_result_tf">0.2500</td>
+						<td rowspan="3" class="table_definition" id="definition_tfidf_destination">Click a measurement to see its definition</td>
+					</tr>
+					<tr class="definition" id="definition_tfidf">
+						<td>idf</td>
+						<td id="tfidf_result_idf">1.0986</td>
+					</tr>
+					<tr class="definition" id="definition_tfidf">
+						<td>tfidf</td>
+						<td id="tfidf_result_tfidf">0.2747</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</div>	
+</div>
+<hr />
+
+
+<!-- Real data –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+<div id="scrollRealData" onmouseover="scrollOn('linkRealData')">
+	<div class="ContainerRealData" >
+		<div class="row">
+			<div class="twelve columns">
+				<a id="link_realData">
+					<h2>Real Data</h2>
+				</a>
+				<p>Now let’s look at an example with real data. For part of this project, work was done on developing a model which could automatically classify different types of propositions. A proposition is a statement which proposes an idea that can be true or false. Using the classifications proposed by Wagemans (<a href="https://periodic-table-of-arguments.org/">source</a>), the aim of the model was to classify a proposition with a type: Fact, Value, or Policy. A proposition of policy expresses that specific action should be taken. For example, ‘we should increase the voting age to 21’. A proposition of value expresses that something is judged to be so, for example ‘War and Peace is the best book of all time’. A proposition of fact expresses that something is the case, and could be independently verified. For example, ‘tomorrow will be a Saturday’. </p>
+			</div>	
+			<div class="six columns" style="margin-left: 0%">
+				<p>A transcript of a debate from the 2016 United States of America Presidential debates was used to train the model. The transcript contains 796 different propositions, 383 of type Value, 110 of type Proposal, and 289 of type Fact. Different features including term inverse-document frequency, and information about the texts such as sentence length and number of verbs were used. The results achieved are shown on the confusion matrix for the model here. Although it provides us with some information, it would be beneficial to gain a further insight into the model. </p>
+			</div>
+			
+			<div class="six columns" id="confusion">			
+			</div>
+		</div>
+	</div>
+</div>
+<hr />	
+
+
+
+
+<!-- Scatter plot –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+<div id="scrollScatter" onmouseover="scrollOn('linkScatter')">
+	<div class="ContainerScatterPlot">
+		<div class="row" >
+			<div class="twelve columns">
+				<a id="link_scatterPlot">
+					<h2>Scatter plot</h2>
+				</a>
+				<p>We can start by plotting some of the features used on bar charts and scatter plots. In the scatter plot below, we can compare two features at a time, for example, the number of verbs within a proposition compared with the length of the sentence. Each dot on the chart represents a proposition within the testing section of the data. Hover over a point with your mouse (or tap if on mobile) to see the values for the proposition and the proposition sentence. By clicking and dragging, a square will appear which can be used to select a portion of the data.  </p>
+			</div>
+		</div>
+		<div class="row">
+			<div class="six columns">
+				<p>These selected points on the scatter plot will be highlighted on the bar chart below. You can use this to compare different features and select different portions of the data to see how the features compare. Clicking on the axis labels for either the scatter plot or the bar chart allows you to change the feature you are looking at. </p>
+			</div>
+			<div class="six columns" id="scatterPlot">
+			</div>
+
+		</div>
+		
+		<div class="row">
+			<div class="twelve columns" id="scatterPlotBar">
+			</div>
+			<div class="twelve columns">
+				<p class="barchart_interaction">Sentence Length</p>
+			</div>
+		</div>
+	</div>
+</div>
+<hr />
+
+
+
+<!-- LIME Word importance –––––––––––––––––––––––––––––––––––––––––––––––––– -->	
+<div id="scrollLIME" onmouseover="scrollOn('linkLime')">
+	<div class="ContainerLIME" >
+		<div class="row" >
+			<div class="twelve columns" id="vpf_text">
+				<a id="link_LIME">
+					<h2>Word importance</h2>
+				</a>
+				<p>Although looking at the features of a dataset can be helpful, it doesn’t tell us anything about how useful these features were for the model or why certain predictions were made. One technique we can use to gain more insight is called 'local interpretable model-agnostic explanations' (LIME). LIME creates new, additional Machine Learning models which are used to test our model by changing the input data and measuring the affect this has. LIME uses interpretable models, models which can be interrogated to see how a result was reached, to provide information about a specific result that our model reached.</p> 
+				<p>For example, say one of our propositions was ‘We should order lunch’. The LIME models will test our model with variations of this sentence, with various words removed, such as ‘We __ order lunch’, ’We should __ lunch’ ‘We should _ _’ and so on.  With the results that these altered sentences achieve, we can start to build a picture about which words within the sentence are the most important for the classification. If a word is removed and the result achieved by our model is affected, negatively or positively, we can see how different words are more or less important to the model.</p>
+				<p>Below is a scrollable box containing the test data used for the Model. The headings shows the actual classification that the propositions belong to and the classification that was predicted by the model. You can change these headings by clicking on them to view the different propositions. You can then click on a sentence to see it’s classification likelihood in the bar chart, as indicated by the LIME models, and hover over the sentence beneath this to see the LIME values for each word, which indicates its importance to that particular classification. </p>
+			
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="twelve columns">
+				<p class="header_true">True classification: </p> <p class="heading_true_classification">Value</p>
+				<p class="header_predicted">Predicted classification: </p> <p class="heading_predicted_classification">Value</p>
+
+				<div class="true_positive_div"  id="matrix_sentences"> <p class="true_positive">tp</p> 
+				</div>
+			</div>
+
+		</div>
+		
+		<div class="row">
+			<div class="twelve columns">
+				<div id="VPFBarChart">
+			</div>
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="current_word_div">
+					<h3 class="current_word">WORD: <br />LIME VALUE:</h3>
+					
+				</div>
+			<div class="twelve colums" id="proposition_text_highlight">
+				<p class="lime_hover_instructions"><i>Hover over a word to see its LIME value. A LIME value indicates the affect the word had on the models decision when making the classification.</i></p>
+			</div>
+
+		</div>
+	</div>
+</div>
+<hr />
+
+
+<!-- SHAP values –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+<div id="scrollSHAP" onmouseover="scrollOn('linkShap')">
+	<div class="ContainerSHAP" >
+		<div class="row">
+			<div class="twelve columns">
+				<a id="link_SHAP">
+					<h2>SHAP</h2>
+				</a>
+				<p>One problem with LIME, however, is that it only looks at one proposition within our training data at a time. To gain insight into the model as a whole, we can use a technique called SHapley Additive exPlanations (SHAP). Although somewhat complex, the basic idea is to use various feature sets to calculate the impact an individual feature has on the model. These impacts, called Shapley Values, can be averaged across the entire dataset to give us the overall importance of different features.</p> 
+				<p>The scatter plot below shows us the feature importance for the Proposition dataset. The labels of the y-axis (on the left hand side) are the top features, in order of importance from top to bottom. The x-axis (on the bottom) indicates the Shapley Value (positive or negative impact on the model). The colour of the point indicates the relative value of the feature (for example, a sentence of length 4 would be blue in colour, whereas a sentence of length 400 would be red). This can give us an insight into the most important features for a model, and allows us to see the relationship between a feature's value and the impact it has on a prediction. </p>			
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="ten columns" id="shap">
+			</div>
+		</div>
+	</div>
+</div>
+<hr />
+
+
+<!-- More information –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+<div id="scrollSummary" onmouseover="scrollOn('linkSummary')">
+	<div class="ContainerEnd" >
+		<div class="row">
+			<div class="twelve columns">
+				<a id="link_summary">
+					<h2>Summary</h2>
+				</a>
+				<p>Hopefully this website has provided you with a useful introduction into some Machine Learning and explainable Machine Learning techniques.</p>
+				<p>If you are interested in the topic and wish to learn more, you may find the following websites useful: </p>
+				<ul>
+					<li><a href="https://christophm.github.io/interpretable-ml-book/">Interpretable Machine Learning</a> by Christoph Molnar</li>
+					<li><a href="https://arxiv.org/abs/1602.04938">"Why Should I Trust You?": Explaining the Predictions of Any Classifier</a> by Riberio et al</li>
+					<li><a href="http://papers.nips.cc/paper/7062-a-unified-approach-to-interpreting-model-predictions">A Unified Approach to Interpreting Model Predictions</a> by Lundberg and Lee</li>
+					<li><a href="https://github.com/slundberg/shap">SHAP Python package</a></li>
+					<li><a href="https://github.com/marcotcr/lime">LIME Python package</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+</div>
+
+
+
+<script>
+	// Initialise javascript elements
+	// See init.js
+	xaiInit()
+	
+</script>
+
+
+<!-- End Document
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+</body>
+</html>

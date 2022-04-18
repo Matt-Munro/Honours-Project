@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: confusionMatrix_data.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: confusionMatrix_data.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * @file Sets up and displays a confusion matrix chart
+ * @author Matt Foulis
+ * @see Confusion matrix code is an amended version of the following:
+ * https://github.com/arpitnarechania/d3-matrix/blob/master/dist/matrix.js
+ * Accessed under the MIT licence https://github.com/arpitnarechania/d3-matrix
+ */
+
+// Layout variables
+var cmMargin = { top: 60, right: 60, bottom: 120, left: 120 }
+var cmWidth = 600 - cmMargin.left - cmMargin.right
+var cmHeight = 600 - cmMargin.top - cmMargin.bottom
+
+// Main SVG element
+var cmSVG
+
+// Provides x and y axis scaling
+var cmXScale, cmYScale
+
+/**
+ * Create and display the confusion matrix
+ */
+function cmDisplay () {
+  // Values for confusion matrix
+  // As real data is being used these do not change and can therefore be set here
+  var confusionMatrix = [
+    [36, 2, 20],
+    [3, 12, 7],
+    [18, 4, 55]
+  ]
+
+  // Setup for SVG elements
+  d3.select('div#confusion')
+    .append('div')
+    .classed('svg-container-confusion', true)
+    .append('svg')
+    .attr('preserveAspectRatio', 'xMinYMin meet')
+    .attr('viewBox', '0 0 600 600')
+    .classed('svg-content-confusion', true)
+    .classed('confusion', true)
+    .append('rect')
+    .classed('rect', true)
+    .attr('width', cmWidth + cmMargin.left + cmMargin.right)
+    .attr('height', cmHeight + cmMargin.top + cmMargin.bottom)
+
+  // Create and assign main SVG element
+  cmSVG = d3.select('.confusion').append('svg')
+    .append('g')
+    .attr('transform', 'translate(' + cmMargin.left + ',' + cmMargin.top + ')')
+
+  // X scaling
+  cmXScale = d3.scaleBand()
+    .domain(d3.range(confusionMatrix[0].length))
+    .range([0, cmWidth])
+
+  // Y Scaling
+  cmYScale = d3.scaleBand()
+    .domain(d3.range(confusionMatrix.length))
+    .range([0, cmHeight])
+
+  // Create rows
+  var row = cmSVG.selectAll('.row')
+    .data(confusionMatrix)
+    .enter()
+    .append('g')
+    .attr('class', 'row')
+    .attr('index', function (d, i) { return i })
+    .attr('transform', function (d, i) { return 'translate(0,' + cmYScale(i) + ')' })
+
+  // Create cells
+  var cell = row.selectAll('.cell')
+    .data(function (d) { return d })
+    .enter().append('g')
+    .attr('class', 'cell')
+    .attr('transform', function (d, i) { return 'translate(' + cmXScale(i) + ', 0)' })
+
+  // Add rectangle for cells
+  cell.append('rect')
+    .attr('width', cmXScale.bandwidth())
+    .attr('height', cmYScale.bandwidth())
+    .style('stroke', 'black')
+    .style('stroke-width', '1px')
+    .attr('class', 'cmCell')
+    .attr('id', function (d, i) { return i + this.parentNode.parentNode.getAttribute('index') })
+
+  // Add numbers to cells
+  cell.append('text')
+    .attr('dy', '.32em')
+    .attr('x', cmXScale.bandwidth() / 2)
+    .attr('y', cmYScale.bandwidth() / 2)
+    .style('font-size', '4rem')
+    .style('fill', 'white')
+    .attr('text-anchor', 'middle')
+    .attr('class', 'cmCellText')
+    .text(function (d, i) { return d })
+
+  cmAddLabels()
+  cmAddColour()
+}
+
+/**
+ * Adds color to the matrix cells
+ */
+function cmAddColour () {
+  var cells = d3.selectAll('.cmCell')
+  var texts = d3.selectAll('.cmCellText')
+
+  for (var i = 0; i &lt; 9; i++) {
+    cells._groups[0][i].style.fill = colors(texts._groups[0][i].innerHTML)
+  }
+}
+
+/**
+ * Add labels to X and Y axis of confusion matrix
+ */
+function cmAddLabels () {
+  // X/Y Axis labels
+  var vpfLabels = ['Value', 'Policy', 'Fact']
+
+  var labels = cmSVG.append('g')
+    .attr('class', 'labels')
+
+  var columnLabels = labels.selectAll('.column-label')
+    .data(vpfLabels)
+    .enter().append('g')
+    .attr('class', 'column-label')
+    .attr('transform', function (d, i) { return 'translate(' + cmXScale(i) + ',' + cmHeight + ')' })
+
+  columnLabels.append('text')
+    .attr('x', 0)
+    .attr('dx', '-0.82em')
+    .attr('y', cmYScale.bandwidth() / 2)
+    .attr('dy', '.41em')
+    .attr('text-anchor', 'end')
+    .attr('transform', 'rotate(-90)')
+    .text(function (d, i) { return d })
+    .attr('class', 'confusionMatrixLabel')
+
+  var rowLabels = labels.selectAll('.row-label')
+    .data(vpfLabels)
+    .enter().append('g')
+    .attr('class', 'row-label')
+    .attr('transform', function (d, i) { return 'translate(' + 0 + ',' + cmYScale(i) + ')' })
+
+  rowLabels.append('text')
+    .attr('x', -8)
+    .attr('y', cmYScale.bandwidth() / 2)
+    .attr('dy', '.32em')
+    .attr('text-anchor', 'end')
+    .text(function (d, i) { return d })
+    .attr('class', 'confusionMatrixLabel')
+}
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#addLegend">addLegend</a></li><li><a href="global.html#barOnMouse">barOnMouse</a></li><li><a href="global.html#barOnMouseOut">barOnMouseOut</a></li><li><a href="global.html#callSetupFunction">callSetupFunction</a></li><li><a href="global.html#cmAddColour">cmAddColour</a></li><li><a href="global.html#cmAddLabels">cmAddLabels</a></li><li><a href="global.html#cmDisplay">cmDisplay</a></li><li><a href="global.html#countTotal">countTotal</a></li><li><a href="global.html#displayBarChart">displayBarChart</a></li><li><a href="global.html#displayFeaturesBarChart">displayFeaturesBarChart</a></li><li><a href="global.html#displayFeaturesScatter">displayFeaturesScatter</a></li><li><a href="global.html#displaySelectedSentence">displaySelectedSentence</a></li><li><a href="global.html#displayShap">displayShap</a></li><li><a href="global.html#expcmDisplay">expcmDisplay</a></li><li><a href="global.html#expcmMatrixDrag">expcmMatrixDrag</a></li><li><a href="global.html#expcmOnDrag">expcmOnDrag</a></li><li><a href="global.html#getCellColour">getCellColour</a></li><li><a href="global.html#getMaxLength">getMaxLength</a></li><li><a href="global.html#getPointColour">getPointColour</a></li><li><a href="global.html#getPropositionColour">getPropositionColour</a></li><li><a href="global.html#getPropositionX">getPropositionX</a></li><li><a href="global.html#getPropositionY">getPropositionY</a></li><li><a href="global.html#getShapColor">getShapColor</a></li><li><a href="global.html#getVPFBarColor">getVPFBarColor</a></li><li><a href="global.html#highlightDefinition">highlightDefinition</a></li><li><a href="global.html#highlightLength">highlightLength</a></li><li><a href="global.html#interactiveTextOnClick">interactiveTextOnClick</a></li><li><a href="global.html#interactiveTextOnDrag">interactiveTextOnDrag</a></li><li><a href="global.html#isBrushed">isBrushed</a></li><li><a href="global.html#loadData">loadData</a></li><li><a href="global.html#loadError">loadError</a></li><li><a href="global.html#loadShapData">loadShapData</a></li><li><a href="global.html#loadXTestData">loadXTestData</a></li><li><a href="global.html#pointOnMouse">pointOnMouse</a></li><li><a href="global.html#printPropositions">printPropositions</a></li><li><a href="global.html#propositionHighlightHeaderSetup">propositionHighlightHeaderSetup</a></li><li><a href="global.html#propositionHighlightSetup">propositionHighlightSetup</a></li><li><a href="global.html#propositionTextOnMouse">propositionTextOnMouse</a></li><li><a href="global.html#scrollOn">scrollOn</a></li><li><a href="global.html#setDefinitions">setDefinitions</a></li><li><a href="global.html#setupTfidf">setupTfidf</a></li><li><a href="global.html#setupXAxisLabel">setupXAxisLabel</a></li><li><a href="global.html#shapLoadError">shapLoadError</a></li><li><a href="global.html#textInteractionSetup">textInteractionSetup</a></li><li><a href="global.html#tfidfDragBegin">tfidfDragBegin</a></li><li><a href="global.html#tfidfUpdateResult">tfidfUpdateResult</a></li><li><a href="global.html#unhighlightLength">unhighlightLength</a></li><li><a href="global.html#updateAccuracyValues">updateAccuracyValues</a></li><li><a href="global.html#updateChart">updateChart</a></li><li><a href="global.html#updateFeaturesBar">updateFeaturesBar</a></li><li><a href="global.html#updateMatrixArray">updateMatrixArray</a></li><li><a href="global.html#updateScatter">updateScatter</a></li><li><a href="global.html#updateTextIneractionResult">updateTextIneractionResult</a></li><li><a href="global.html#updateVPFChart">updateVPFChart</a></li><li><a href="global.html#updateXAxis">updateXAxis</a></li><li><a href="global.html#updateYAxis">updateYAxis</a></li><li><a href="global.html#VPFBarChartSetup">VPFBarChartSetup</a></li><li><a href="global.html#xaiInit">xaiInit</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.4</a> on Mon May 04 2020 11:53:02 GMT+0100 (British Summer Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

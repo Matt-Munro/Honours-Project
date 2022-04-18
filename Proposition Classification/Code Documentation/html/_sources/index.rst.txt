@@ -1,0 +1,33 @@
+.. Proposition Classification documentation master file, created by
+   sphinx-quickstart on Sat May  2 14:53:09 2020.
+   You can adapt this file completely to your liking, but it should at least
+   contain the root `toctree` directive.
+
+Welcome to Proposition Classification's documentation!
+======================================================
+
+.. automodule:: process_data
+    :members:
+    
+.. automodule:: model
+    :members:
+    
+.. automodule:: features
+    :members:
+    
+.. automodule:: lime_data
+    :members:
+
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Contents:
+
+
+
+Indices and tables
+==================
+
+* :ref:`genindex`
+* :ref:`modindex`
+* :ref:`search`
