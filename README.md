@@ -15,3 +15,4 @@ Various features were used including specificity (using https://github.com/jjess
 ## Website 
 For the second part of the project an interactive website was developed, demonstrating the results of the ML project alongside various explainable artificial intelligence (XAI) techniques that can be used to try and understand what is behind a ML decision. The website features interactive plots developed using D3.js (https://d3js.org/) which allow users to gain a more involved understanding of various ML and XAI techniques. Documentation and a user manual were also prepared to go with the website. 
 
+![website screenshot](screenshots/XAI-screenshot.png)
